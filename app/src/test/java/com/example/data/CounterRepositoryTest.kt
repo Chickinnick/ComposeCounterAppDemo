@@ -1,6 +1,5 @@
 package com.example.data
 
-import org.junit.Assert
 import org.junit.Assert.*
 
 import org.junit.Before
@@ -16,7 +15,7 @@ class CounterRepositoryTest {
 
     @Test
     fun increment() {
-        counterRepository = CounterRepository()
+        counterRepository = CounterRepository(0, 10)
         counterRepository.increment()
         val peopleAmount = counterRepository.getPeopleAmount()
         assertEquals(peopleAmount, 1)
@@ -24,9 +23,16 @@ class CounterRepositoryTest {
 
     @Test
     fun decrement() {
-        counterRepository = CounterRepository(2)
+        counterRepository = CounterRepository(2, 10)
         counterRepository.decrement()
         val peopleAmount = counterRepository.getPeopleAmount()
         assertEquals(peopleAmount, 1)
+    }
+
+
+    @Test(expected = MaxPeopleReachedException::class)
+    fun maxAmountTest() {
+        counterRepository = CounterRepository(10, 10)
+        counterRepository.increment()
     }
 }

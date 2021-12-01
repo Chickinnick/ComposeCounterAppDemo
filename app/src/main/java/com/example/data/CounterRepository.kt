@@ -1,9 +1,9 @@
 package com.example.data
 
 class CounterRepository(var amountOfPeople: Int = 0,
-                        val maxPeopleValue : Int = Int.MAX_VALUE) {
+                        val maxPeopleValue : Int = Int.MAX_VALUE) : ICounterRepository {
 
-    fun increment() {
+    override fun increment() {
         if (amountOfPeople < maxPeopleValue) {
             amountOfPeople = amountOfPeople.inc()
         } else {
@@ -11,11 +11,11 @@ class CounterRepository(var amountOfPeople: Int = 0,
         }
     }
 
-    fun decrement() {
+    override fun decrement() {
         amountOfPeople = amountOfPeople.dec()
     }
 
-    fun getPeopleAmount(): Int {
+    override fun getPeopleAmount(): Int {
         return amountOfPeople
     }
 }
